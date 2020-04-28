@@ -28,4 +28,5 @@ export const SliderValue = styled.div`
   color: #f8f8f0;
   font-size: 0.6em;
   color: #fd971f;
+  padding-bottom: 2px;
 `

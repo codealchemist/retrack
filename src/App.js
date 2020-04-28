@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, StatusBar, Title } from 'elements'
+import VolumeUpIcon from '@material-ui/icons/VolumeUp'
+import { Container, StatusBar, Title, Background } from 'elements'
 import TracksContainer from 'components/TracksContainer'
 
 const App = () => {
@@ -12,6 +13,9 @@ const App = () => {
       </StatusBar>
 
       <TracksContainer />
+      <Background>
+        <VolumeUpIcon />
+      </Background>
     </Container>
   )
 }

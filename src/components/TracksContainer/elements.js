@@ -1,14 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: grid;
   width: 100%;
-  height: 100%;
-  background: #3b3a32;
-  grid-template-columns: 100%;
-  grid-template-rows: 20% 20% 20% 20%;
-  padding-top: 1.75em;
-  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+`
+
+export const Tracks = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   z-index: 10;
 `
 
@@ -19,4 +22,5 @@ export const DropArea = styled.div`
   align-items: center;
   justify-content: center;
   color: #a6e22e;
+  min-height: 20vh;
 `

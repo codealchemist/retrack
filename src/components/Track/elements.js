@@ -2,11 +2,9 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
-  background: #49483e;
-  border: 1px solid #272822;
   display: grid;
   grid-template-columns: 20% 80%;
+  margin-bottom: 1px;
 `
 export const Controls = styled.div`
   width: 100%;
