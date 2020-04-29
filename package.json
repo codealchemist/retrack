@@ -13,7 +13,9 @@
     "react-dial-knob": "^1.1.5",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
+    "react-hot-keys": "^2.5.2",
     "react-scripts": "3.4.1",
+    "reactn": "^2.2.7",
     "styled-components": "^5.1.0",
     "wavesurfer.js": "^3.3.3"
   },

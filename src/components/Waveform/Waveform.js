@@ -1,9 +1,11 @@
-import React, { createRef, useEffect } from 'react'
+import React, { createRef, useEffect, useState, useGlobal } from 'reactn'
 import { Container } from './elements'
 import WaveSurfer from 'wavesurfer.js'
 import Cursor from 'wavesurfer.js/dist/plugin/wavesurfer.cursor'
 
 const Waveform = ({ file }) => {
+  const [isPlaying] = useGlobal('isPlaying')
+  const [wavesurfer, setWavesurfer] = useState()
   const el = createRef()
 
   useEffect(() => {
@@ -19,12 +21,24 @@ const Waveform = ({ file }) => {
             color: '#fff',
             padding: '2px',
             'font-size': '10px'
+          },
+          customStyle: {
+            position: 'fixed',
+            'z-index': 10
           }
         })
       ]
     })
     wavesurfer.loadBlob(file)
+    setWavesurfer(wavesurfer)
+    el.current.focus()
+    el.current.click()
   }, [file])
+
+  useEffect(() => {
+    if (!wavesurfer) return
+    wavesurfer.playPause()
+  }, [isPlaying])
 
   return <Container ref={el}></Container>
 }

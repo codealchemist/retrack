@@ -1,38 +1,53 @@
-import React, { useState, useCallback } from 'react'
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useGlobal,
+  createRef
+} from 'reactn'
 import { useDropzone } from 'react-dropzone'
+import Hotkeys from 'react-hot-keys'
 import Track from 'components/Track'
 import { Container, Tracks, DropArea } from './elements'
 import { WithPointer } from 'elements'
 
 const TracksContainer = () => {
+  const [isPlaying, setIsPlaying] = useGlobal('isPlaying')
   const [audioFiles, setAudioFiles] = useState([])
   const onDrop = useCallback(
     (files) => {
-      console.log('Dropped files', files)
-      console.log('audioFiles', audioFiles)
       const addedFiles = []
       files.forEach((file) => {
         if (!file || !file.type || !file.type.match('audio')) return
         addedFiles.push(file)
       })
-      console.log('FILES', [...audioFiles, ...addedFiles])
       setAudioFiles([...audioFiles, ...addedFiles])
     },
     [audioFiles]
   )
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    noKeyboard: true
+  })
+
+  const onKeyDown = () => {
+    console.log('PLAY/PAUSE')
+    setIsPlaying(!isPlaying)
+  }
 
   return (
     <Container>
-      <Tracks count={audioFiles.length}>
-        {audioFiles.map((file, i) => (
-          <Track file={file} key={`${file.name}${i}`} />
-        ))}
-      </Tracks>
+      <Hotkeys keyName="space" onKeyDown={onKeyDown}>
+        <Tracks count={audioFiles.length}>
+          {audioFiles.map((file, i) => (
+            <Track file={file} key={`${file.name}${i}`} />
+          ))}
+        </Tracks>
+      </Hotkeys>
 
       <WithPointer>
         <DropArea {...getRootProps()}>
-          <input {...getInputProps()} />
+          <input id="file-input" {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (

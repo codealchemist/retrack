@@ -21,6 +21,14 @@ export const DropArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a6e22e;
   min-height: 20vh;
+  color: #a6e22e;
+
+  p {
+    padding: 20px;
+    border-radius: 5px;
+    background: #3b3a32;
+    opacity: 0.7;
+    z-index: 20;
+  }
 `

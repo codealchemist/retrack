@@ -5,8 +5,10 @@ import Waveform from 'components/Waveform'
 import PanningSlider from 'components/PanningSlider'
 
 const Track = ({ file }) => {
+  const { name, size } = file
   const [volume, setVolume] = useState(80)
   const [panning, setPanning] = useState(50)
+  const [trackName, setTrackName] = useState(name.replace(/\.[a-z0-9]{3}$/, ''))
 
   const onVolumeChange = (value) => {
     setVolume(value)
@@ -19,7 +21,7 @@ const Track = ({ file }) => {
   return (
     <Container>
       <Controls>
-        <Title>Demo track</Title>
+        <Title>{trackName}</Title>
 
         <KnobContainer>
           <Donut
