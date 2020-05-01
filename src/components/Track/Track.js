@@ -46,7 +46,7 @@ const Track = ({ file }) => {
 
         <PanningSlider />
       </Controls>
-      <Waveform file={file}></Waveform>
+      <Waveform file={file} name={trackName}></Waveform>
     </Container>
   )
 }

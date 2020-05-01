@@ -5,11 +5,19 @@ import React, {
   useGlobal,
   createRef
 } from 'reactn'
+import styled from 'styled-components'
+import ReactCursorPosition from 'react-cursor-position'
 import { useDropzone } from 'react-dropzone'
 import Hotkeys from 'react-hot-keys'
 import Track from 'components/Track'
 import { Container, Tracks, DropArea } from './elements'
 import { WithPointer } from 'elements'
+import TimeCursor from './TimeCursor'
+
+const StyledReactCursorPosition = styled(ReactCursorPosition)`
+  width: 100%;
+  height: 100%;
+`
 
 const TracksContainer = () => {
   const [isPlaying, setIsPlaying] = useGlobal('isPlaying')
@@ -30,9 +38,11 @@ const TracksContainer = () => {
     noKeyboard: true
   })
 
-  const onKeyDown = () => {
-    console.log('PLAY/PAUSE')
+  const onKeyDown = (key, event) => {
     setIsPlaying(!isPlaying)
+    event.preventDefault()
+    event.stopPropagation()
+    console.log('PLAY/PAUSE')
   }
 
   return (

@@ -8,6 +8,18 @@ export const Container = styled.div`
   flex-grow: 1;
 `
 
+export const VerticalLine = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  border-left: 1px solid black;
+  ${({ x }) => {
+    return `
+      transform: translate(${x}px);
+    `
+  }}
+`
+
 export const Tracks = styled.div`
   display: flex;
   flex-direction: column;

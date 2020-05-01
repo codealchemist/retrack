@@ -3,8 +3,9 @@ import { Container } from './elements'
 import WaveSurfer from 'wavesurfer.js'
 import Cursor from 'wavesurfer.js/dist/plugin/wavesurfer.cursor'
 
-const Waveform = ({ file }) => {
+const Waveform = ({ file, name }) => {
   const [isPlaying] = useGlobal('isPlaying')
+  const [progress, setProgress] = useGlobal('progress')
   const [wavesurfer, setWavesurfer] = useState()
   const el = createRef()
 
@@ -12,22 +13,9 @@ const Waveform = ({ file }) => {
     if (!file) return
     const wavesurfer = WaveSurfer.create({
       container: el.current,
-      plugins: [
-        Cursor.create({
-          showTime: true,
-          opacity: 1,
-          customShowTimeStyle: {
-            'background-color': '#000',
-            color: '#fff',
-            padding: '2px',
-            'font-size': '10px'
-          },
-          customStyle: {
-            position: 'fixed',
-            'z-index': 10
-          }
-        })
-      ]
+      responsive: true
+      // cursorWidth: 0,
+      // progressColor: 'transparent',
     })
     wavesurfer.loadBlob(file)
     setWavesurfer(wavesurfer)
@@ -39,6 +27,12 @@ const Waveform = ({ file }) => {
     if (!wavesurfer) return
     wavesurfer.playPause()
   }, [isPlaying])
+
+  useEffect(() => {
+    if (typeof progress !== 'number') return
+    console.log('Adjust SEEK', progress)
+    wavesurfer.seekTo(progress)
+  }, [progress])
 
   return <Container ref={el}></Container>
 }
